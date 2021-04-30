@@ -21,11 +21,23 @@ namespace BloodDonationRestApi.Controllers.User
         [HttpGet, Route("api/b_book/{id}")]
         public IHttpActionResult BookByUserId(int id, String bgroup)
         {
+            var listOfbb = new List<BloodBook>();
             if (bgroup == null)
             {
-                return Ok(context.BloodBooks.Where(x => x.UserId == id).ToList());
+                listOfbb = context.BloodBooks.Where(x => x.UserId == id).ToList();
+                listOfbb.FirstOrDefault().Links.Add(new Link() { Url = "http://localhost:10793/api/b_book", Method = "POST", Relation = "Create a new Blood Book" });
+                listOfbb.FirstOrDefault().Links.Add(new Link() { Url = "http://localhost:10793/api/b_book/{id}", Method = "GET", Relation = "Get book for specific userid" });
+                listOfbb.FirstOrDefault().Links.Add(new Link() { Url = "http://localhost:10793/api/b_book/{id}", Method = "PUT", Relation = "Update a book using blood book id" });
+                return Ok(listOfbb);
             }
-            return Ok(context.BloodBooks.Where(x => x.UserId == id && x.BloodGroup == bgroup).ToList());
+            listOfbb = context.BloodBooks.Where(x => x.UserId == id && x.BloodGroup == bgroup).ToList();
+            if (listOfbb.Count > 0)
+            {
+                listOfbb.FirstOrDefault().Links.Add(new Link() { Url = "http://localhost:10793/api/b_book", Method = "POST", Relation = "Create a new Blood Book" });
+                listOfbb.FirstOrDefault().Links.Add(new Link() { Url = "http://localhost:10793/api/b_book/{id}", Method = "GET", Relation = "Get book for specific userid" });
+                listOfbb.FirstOrDefault().Links.Add(new Link() { Url = "http://localhost:10793/api/b_book/{id}", Method = "PUT", Relation = "Update a book using blood book id" });
+            }
+            return Ok(listOfbb);
         }
 
         [HttpPost, Route("api/b_book")]

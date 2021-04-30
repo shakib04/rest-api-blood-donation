@@ -15,11 +15,13 @@ function loadBookList(bgroup = "") {
             if (xmlHttp.status == 200) {
                 var str = '';
                 bb_data = xmlHttp.responseJSON;
-                console.log(bb_data);
                 for (let i = 0; i < bb_data.length; i++) {
                     str += ' <tr><td>' + bb_data[i].BookName + '</td><td>' + bb_data[i].BloodGroup + '</td><td>' + bb_data[i].PhoneNumber + '</td><td>' + bb_data[i].Relation + '</td><td><button onclick="getById(this)" value="' + bb_data[i].BookId + '" class="btn btn-link">Update</button>    <button onclick="ConfirmDelete(this)" value="' + bb_data[i].BookId + '" class="btn btn-danger">Remove</button></td></tr>';
                 }
                 $("#list_of_bb tbody").html(str);
+                if (bb_data.length > 0) {
+                    console.log(bb_data[0].Links);
+                }
             }
         }
     });

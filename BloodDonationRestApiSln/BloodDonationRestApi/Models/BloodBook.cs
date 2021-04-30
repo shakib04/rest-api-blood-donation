@@ -7,6 +7,11 @@ namespace BloodDonationRestApi.Models
 {
     public class BloodBook
     {
+        [NotMapped]
+        List<Link> links = new List<Link>();
+        [NotMapped]
+        public List<Link> Links { get { return links; } }
+
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int BookId { get; set; }
         public string BookName { get; set; }

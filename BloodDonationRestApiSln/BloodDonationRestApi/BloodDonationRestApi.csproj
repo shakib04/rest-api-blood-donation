@@ -125,6 +125,7 @@
     <Compile Include="Models\DonationReply.cs" />
     <Compile Include="Models\donorRating.cs" />
     <Compile Include="Models\FlagPost.cs" />
+    <Compile Include="Models\Link.cs" />
     <Compile Include="Models\Post.cs" />
     <Compile Include="Models\Report.cs" />
     <Compile Include="Models\RequestBlood.cs" />
