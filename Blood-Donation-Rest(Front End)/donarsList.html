@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light"></nav>
+
+    <div id="search_and_donors_list">
+        <div class="form-group">
+            <select class="form-control" id="SearchGroup" name="SearchDonar">
+                <option value="A+">A Positive</option>
+                <option value="A-">A Negative</option>
+                <option value="B+">B Positive</option>
+                <option value="B-">B Negative</option>
+                <option value="AB+">AB Positive</option>
+                <option value="AB-">AB Negative</option>
+                <option value="O+">O Positive</option>
+                <option value="O-">O Negative</option>
+            </select>
+
+        </div>
+        <div class="form-group">
+            <button type="submit" id="groupBySearchBtn" class="btn btn-primary">Search</button>
+
+        </div>
+
+
+        <table class="table" id="donar_list_tbl">
+            <thead>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Blood Group
+                    </th>
+                    <th>
+                        Phone Number
+                    </th>
+                    <th>
+                        Address
+                    </th>
+                    <th>
+                        Age
+                    </th>
+
+                    <th>
+                        Last Donate
+                    </th>
+
+                </tr>
+            </thead>
+
+
+            <tbody>
+
+            </tbody>
+
+        </table>
+    </div>
+
+    <div id="request_message_wrap" style="display: none;">
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="BookName">Name</label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" placeholder="Enter Request Message"
+                    id="Request_Message" name="Request_Message" type="text" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" id="cancel_Request_Btn" value="Cancel" class="btn btn-danger" />
+                <input type="submit" id="Request_Btn" value="Request" class="btn btn-primary" />
+            </div>
+        </div>
+
+    </div>
+
+    <script src="js/jquery-3.6.0.js"></script>
+    <script src="js/default.js"></script>
+
+    <script>
+        function loadDonarsList(group = "") {
+            $.ajax({
+                url: "http://localhost:10793/api/donarslist?s=" + group,
+                method: "GET",
+                complete: function (xmlHttp, status) {
+                    if (xmlHttp.status == 200) {
+                        var str = '';
+                        var data = xmlHttp.responseJSON;
+                        console.log(data);
+                        for (let i = 0; i < data.length; i++) {
+                            str += "<tr><td>" + data[i].Name +
+                                "</td><td>" + data[i].BloodGroup +
+                                "</td><td>" + data[i].Phone +
+                                "</td><td>" + data[i].Address +
+                                "</td><td>" + data[i].DOB +
+                                "</td><td>" + data[i].LastDonate +
+                                "</td><td><button onclick='GetIdOfDonor(this)' id='request_blood' value='" + data[i].UserId + "'  class='flag-post btn btn-secondary'>Request Blood</button>" +
+                                "</td><td><button onclick='GetElement(this)' id='test-flag' value='" + data[i].UserId + "'  class='flag-post btn btn-danger'>Report User</button>" +
+                                "</td></tr>";
+                        }
+                        $("#donar_list_tbl tbody").html(str);
+                    }
+                }
+            });
+        }
+
+        loadDonarsList();
+
+        $("#groupBySearchBtn").click(function () {
+            loadDonarsList(encodeURIComponent($("#SearchGroup").val()));
+        });
+
+        var donorToRequest = "";
+
+        function GetIdOfDonor(element) {
+            outIfNotLogIn();
+            donorToRequest = element.value;
+            $("#request_message_wrap").toggle();
+            $("#search_and_donors_list").toggle();
+        }
+
+        $("#cancel_Request_Btn").click(function () {
+            $("#request_message_wrap").toggle();
+            $("#search_and_donors_list").toggle();
+            donorToRequest = "";
+        });
+
+        $("#Request_Btn").click(function () {
+            $.ajax({
+                url: "http://localhost:10793/api/requestBlood",
+                method: "POST",
+                headers: "Content-Type:application/json",
+                data: {
+                    "Request_Message": $("#Request_Message").val(),
+                    "DonarId": donorToRequest,
+                    "UserId": userIdInSession
+                },
+                complete: function (xmlHttp, status) {
+                    if (xmlHttp.status == 201) {
+                        $("#request_message_wrap").toggle();
+                        $("#search_and_donors_list").toggle();
+                        donorToRequest = "";;
+                    } else {
+                        console.log(html(xmlHttp.status + ":" + xmlHttp.statusText));
+                    }
+                }
+            });
+        })
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <title>Blood Book</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light"></nav>
+
+    <h2>Blood Book - Save Your Relatives Info- Get Help in Emergency Case!!</h2>
+
+    <div id="list_of_bb_wrap">
+        <div class="form-group">
+            <select class="form-control" id="select_bgroup" name="SearchDonar">
+                <option value="A+">A Positive</option>
+                <option value="A-">A Negative</option>
+                <option value="B+">B Positive</option>
+                <option value="B-">B Negative</option>
+                <option value="AB+">AB Positive</option>
+                <option value="AB-">AB Negative</option>
+                <option value="O+">O Positive</option>
+                <option value="O-">O Negative</option>
+            </select>
+
+        </div>
+        <div class="form-group">
+            <button type="submit" id="btnSearch" class="btn btn-primary">Search</button>
+        </div>
+
+        <button id="create_bb_ref" class="btn btn-link">Create Blood Book</button>
+
+        <table class="table" id="list_of_bb">
+
+            <thead>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Blood Group
+                    </th>
+                    <th>
+                        Phone Number
+                    </th>
+                    <th>
+                        Relation with you
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+            </tbody>
+
+        </table>
+
+
+    </div>
+
+
+    <div class="form-horizontal" id="book_forms" style="display: none;">
+        <hr />
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="BookName">Name</label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" data-val="true"
+                    data-val-required="The Name field is required." id="BookName" name="BookName" type="text"
+                    value="" />
+                <span class="field-validation-valid text-danger" data-valmsg-for="BookName"
+                    data-valmsg-replace="true"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="BloodGroup">Blood Group</label>
+            <div class="col-md-10">
+                <select id="BloodGroup" class="form-control" name="BloodGroup">
+                    <option value="A+">A Positive</option>
+                    <option value="A-">A Negative</option>
+                    <option value="B+">B Positive</option>
+                    <option value="B-">B Negative</option>
+                    <option value="AB+">AB Positive</option>
+                    <option value="AB-">AB Negative</option>
+                    <option value="O+">O Positive</option>
+                    <option value="O-">O Negative</option>
+                </select>
+                <span class="field-validation-valid text-danger" data-valmsg-for="BloodGroup"
+                    data-valmsg-replace="true"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="PhoneNumber">Phone Number</label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" data-val="true"
+                    data-val-required="The Phone Number field is required." id="PhoneNumber" name="PhoneNumber"
+                    type="text" value="" />
+                <span class="field-validation-valid text-danger" data-valmsg-for="PhoneNumber"
+                    data-valmsg-replace="true"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Relation">Relation with you</label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" data-val="true"
+                    data-val-required="The Relation with you field is required." id="Relation" name="Relation"
+                    type="text" value="" />
+                <span class="field-validation-valid text-danger" data-valmsg-for="Relation"
+                    data-valmsg-replace="true"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" id="bb_cancel_create" value="Cancel" class="btn btn-dark" />
+                <input type="submit" id="bb_create" value="Create" class="btn btn-primary" />
+                <input type="submit" id="bb_update" value="Update" style="display: none;" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+
+
+    <script src="js/jquery-3.6.0.js"></script>
+    <script src="js/default.js"></script>
+    <script src="js/blood_book.js"></script>
+</body>
+
+</html>

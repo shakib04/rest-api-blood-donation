@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Request</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light"></nav>
+
+    <p class="h4">My Request For Blood</p>
+    <div>
+        <table class="table" id="request_blood_tbl">
+            <thead>
+                <tr>
+                    <th>
+                        Request To
+                    </th>
+                    <th>
+                        Message
+                    </th>
+                    <th>
+                        Group
+                    </th>
+                    <th>
+                        Donor Response
+                    </th>
+                </tr>
+            </thead>
+
+
+            <tbody>
+
+            </tbody>
+
+        </table>
+    </div>
+
+    <script src="js/jquery-3.6.0.js"></script>
+    <script src="js/default.js"></script>
+
+    <script>
+        outIfNotLogIn();
+        function loadRequests() {
+            console.log(userIdInSession);
+            $.ajax({
+                url: "http://localhost:10793/api/MyRequest/" + localStorage.getItem("userId"),
+                method: "GET",
+                complete: function (xmlHttp, status) {
+                    if (xmlHttp.status == 200) {
+                        var str = '';
+                        var data = xmlHttp.responseJSON;
+                        console.log(data);
+                        for (let i = 0; i < data.length; i++) {
+                            str += "<tr><td>" + data[i].userInfoDonar.Name +
+                                "</td><td>" + data[i].Request_Message +
+                                "</td><td>" + data[i].userInfoDonar.BloodGroup +
+                                "</td><td>" + data[i].DonationReplies +
+                                "</td><td><button onclick='GetIdOfDonor(this)' id='request_blood' value='" + data[i].UserId + "'  class='flag-post btn btn-secondary'>Donar Profile</button>" +
+                                "</td><td><button style='display:none;' onclick='GetElement(this)' id='test-flag' value='" + data[i].UserId + "'  class='flag-post btn btn-danger'>Report User</button>" +
+                                "</td></tr>";
+                        }
+                        $("#request_blood_tbl tbody").html(str);
+                    }
+                }
+            });
+        }
+
+        loadRequests();
+    </script>
+</body>
+
+</html>

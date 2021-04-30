@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <title>Report 2</title>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light"></nav>
+
+    <div id="chartContainer"></div>
+
+    <script src="js/jquery-3.6.0.js"></script>
+    <script src="js/default.js"></script>
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script>
+        outIfNotLogIn();
+        var jan = 0;
+        var feb = 0;
+        var mar = 0;
+        var apr = 0;
+        var may = 0;
+        var jun = 0;
+        var jul = 0;
+        var aug = 0;
+        var sep = 0;
+        var oct = 0;
+        var nov = 0;
+        var dec = 0;
+
+        $(document).ready(function () {
+
+            $.ajax({
+                url: "http://localhost:10793/api/mypostmonth/" + localStorage.getItem("userId"),
+                method: "GET",
+                headers: "Content-Type:application/json",
+                complete: function (xmlHttp, status) {
+                    if (xmlHttp.status == 200) {
+                        var data = xmlHttp.responseJSON;
+                        jan = data["jan"];
+                        feb = data.feb;
+                        mar = data.mar;
+                        apr = data["apr"];
+                        may = data.may;
+                        jun = data.jun;
+
+                        var chart = new CanvasJS.Chart("chartContainer", {
+                            theme: "light2",
+                            animationEnabled: true,
+                            title: {
+                                text: "Column Chart For Monthly Posts"
+                            },
+                            data: [
+                                {
+                                    type: "column",
+                                    dataPoints: [
+                                        {
+                                            y: data["jan"], label: "January"
+                                        },
+                                        { y: data["feb"], label: "February" },
+                                        { y: data["mar"], label: "March" },
+                                        { y: data["apr"], label: "April" },
+                                        { y: data["may"], label: "May" },
+                                        { y: data["jun"], label: "June" },
+                                        { y: jul, label: "July" },
+                                        { y: aug, label: "August" },
+                                        { y: sep, label: "September" },
+                                        { y: oct, label: "October" },
+                                        { y: nov, label: "November" },
+                                        { y: dec, label: "December" },
+                                    ]
+                                }
+                            ]
+                        });
+                        chart.render();
+
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

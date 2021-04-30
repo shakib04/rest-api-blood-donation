@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>All Post</title>
+	<link rel="stylesheet" href="css/bootstrap.css">
+
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	</nav>
+
+
+
+	<div id="login_wrap">
+		<h2>Login Page</h2>
+		<br />
+		<input type="Email" class="form-control" name="Email" id="inputEamil" placeholder="Email">
+		<br />
+		<input type="Password" class="form-control" name="Password" id="inputPassword" placeholder="Password">
+		<br />
+		<div id="errorMsgLogin" class="errorMsg"></div>
+		<br />
+
+		<button id="loginBtn" type="button" class="btn btn-dark">Login</button>
+		<br />
+		<button id="fillBtn" class="btn btn-dark">Fill</button>
+	</div>
+
+	<div id="header"></div>
+
+	<script src="js/jquery-3.6.0.js"></script>
+	<script src="js/default.js"></script>
+	<script>
+		$("#loginBtn").click(function () {
+			if ($("#inputEamil").val() == "" || $("#inputPassword").val() == "") {
+				$("#header").html("<p class='text-danger h5'>Fill All The Fields</p>");
+				return;
+			} else {
+				$("#header").html("");
+			}
+
+			$.ajax({
+				url: "http://localhost:10793/api/user/login?email=" + $("#inputEamil").val() + "&pass=" + $("#inputPassword").val(),
+				method: "GET",
+				complete: function (xmlHttp, status) {
+					if (xmlHttp.status == 200) {
+						var str = '';
+						var data = xmlHttp.responseJSON;
+						console.log(data[0].UserId);
+						localStorage.setItem("userId", data[0].UserId);
+						userIdInSession = localStorage.getItem("userId");
+						localStorage.setItem("type", data[0].Type);
+						if (data[0].Type.toLowerCase() == "user") {
+							location.replace("dashboard.html");
+						}
+
+					} else if (xmlHttp.status == 204) {
+						$("#header").html("<p class='text-danger h5'>Invalid Email or Password</p>");
+					}
+					//console.log(xmlHttp.responseText); 
+				}
+			})
+
+			console.log("test");
+		});
+
+
+
+		$("#fillBtn").click(function () {
+			$("#inputEamil").val("s@mail.com");
+			$("#inputPassword").val("1");
+		});
+	</script>
+
+</body>
+
+</html>

@@ -1,0 +1,14 @@
+1. resourceful api
+2. validation
+
+a)dashboard (post edit, delete integrate koro) (request blood list)
+b)report 2
+c)donarslist
+d)blood book
+e)registration
+f)blood request
+g)funding
+h)profile(others info + pro pic)
+i)age, user profile in donarslist
+j)logout
+k)flowchart + re write

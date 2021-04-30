@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light"></nav>
+
+    <h2>Dashboard</h2>
+
+    <h3 class="h3">My Posts</h3>
+
+    <div class="row" id="myPostList">
+
+    </div>
+
+    <div id="update_post" style="display: none;">
+        <h4>Post</h4>
+        <hr />
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="HospitalName">Hospital Name</label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" id="HospitalName" name="HospitalName" type="text" />
+                <span class="field-validation-valid text-danger" data-valmsg-for="HospitalName"
+                    data-valmsg-replace="true"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Address">Address</label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" id="Address" name="Address" type="text" />
+                <span class="field-validation-valid text-danger" data-valmsg-for="Address"
+                    data-valmsg-replace="true"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="WantedBlood">Wanted Blood Group</label>
+            <div class="col-md-10">
+                <select id="WantedBlood" class="form-control" name="WantedBlood">
+                    <option value="A+">A Positive</option>
+                    <option value="A-">A Negative</option>
+                    <option value="B+">B Positive</option>
+                    <option value="B-">B Negative</option>
+                    <option value="AB+">AB Positive</option>
+                    <option value="AB-">AB Negative</option>
+                    <option value="O+">O Positive</option>
+                    <option value="O-">O Negative</option>
+                </select>
+
+                <span class="field-validation-valid text-danger" data-valmsg-for="WantedBlood"
+                    data-valmsg-replace="true"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="ContactNumber">Contact Number</label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" id="ContactNumber" name="ContactNumber" type="text" />
+                <span class="field-validation-valid text-danger" data-valmsg-for="ContactNumber"
+                    data-valmsg-replace="true"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Text">Text</label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" id="Text" name="Text" type="text" />
+                <span class="field-validation-valid text-danger" data-valmsg-for="Text"
+                    data-valmsg-replace="true"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" id="cancel_update_Post_btn" value="Cancel" class="btn btn-warning" />
+                <input type="submit" id="update_Post_btn" value="Update" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+
+    <script src="js/jquery-3.6.0.js"></script>
+    <script src="js/default.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light"></nav>
+
+
+    <p class="text-center">Primary Info</p>
+    <table class="table" id="primary_info_tbl">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Info</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+
+            </tr>
+        </tbody>
+    </table>
+
+    <button value="" id="Edit_Profile_btn" class="btn btn-secondary">Edit Profile</button>
+
+    <div id="Edit_Profile_Form" style="display: none;">
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Name">Name</label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" id="Name" name="Name" type="text" />
+                <span class="field-validation-valid text-danger" data-valmsg-for="Name"
+                    data-valmsg-replace="true"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Email">Email</label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" data-val="true"
+                    data-val-required="The Email field is required." id="Email" name="Email" type="text" />
+                <span class="field-validation-valid text-danger" data-valmsg-for="Email"
+                    data-valmsg-replace="true"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Phone">Phone Number</label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" id="Phone" name="Phone" type="text" />
+                <span class="field-validation-valid text-danger" data-valmsg-for="Phone"
+                    data-valmsg-replace="true"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Address">Address</label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" id="Address" name="Address" type="text" />
+                <span class="field-validation-valid text-danger" data-valmsg-for="Address"
+                    data-valmsg-replace="true"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="BloodGroup">Your Blood Group</label>
+            <div class="col-md-10">
+                <select class="form-control" id="BloodGroup" name="BloodGroup">
+                    <option value="A+">A Positive</option>
+                    <option value="A-">A Negative</option>
+                    <option value="B+">B Positive</option>
+                    <option value="B-">B Negative</option>
+                    <option value="AB+">AB Positive</option>
+                    <option value="AB-">AB Negative</option>
+                    <option value="O+">O Positive</option>
+                    <option value="O-">O Negative</option>
+                </select>
+
+                <span class="field-validation-valid text-danger" data-valmsg-for="BloodGroup"
+                    data-valmsg-replace="true"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" id="save_primary_btn" value="Save" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script src="js/jquery-3.6.0.js"></script>
+    <script src="js/default.js"></script>
+    <script src="js/my-profile.js"></script>
+
+    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+    <script type="text/javascript">
+
+        var count = 0;
+        if (data.Name == null) {
+            count++;
+        }
+
+        if (data.Phone == null) {
+            count++;
+        }
+        if (data.ProPic == null) {
+            count++;
+        }
+        if (data.Gender == null) {
+            count++;
+        }
+        if (data.Email == null) {
+            count++;
+        }
+
+        if (data.DOB == null) {
+            count++;
+        }
+        if (data.Address == null) {
+            count++;
+        }
+        if (data.BloodGroup == null) {
+            count++;
+        }
+        if (data.NID == null) {
+            count++;
+        }
+        if (data.Social_Profile == null) {
+            count++;
+        }
+        var incomplete = (count * 100) / 10;
+        var completePercentage = 100 - incomplete;
+
+        window.onload = function () {
+            var chart = new CanvasJS.Chart("chartContainer", {
+                title: {
+                    text: "Your Profile Completion"
+                },
+                animationEnabled: true,
+                legend: {
+                    verticalAlign: "center",
+                    horizontalAlign: "left",
+                    fontSize: 20,
+                    fontFamily: "Helvetica"
+                },
+                theme: "light2",
+                data: [
+                    {
+                        type: "pie",
+                        indexLabelFontFamily: "Garamond",
+                        indexLabelFontSize: 20,
+                        indexLabel: "{label} {y}%",
+                        startAngle: -20,
+                        showInLegend: true,
+                        toolTipContent: "{legendText} {y}%",
+                        dataPoints: [
+                            {
+                                y: completePercentage, legendText: "Profile Complete", label: "Profile Complete"
+                            },
+                            { y: incomplete, legendText: "Incomplete", label: "Incomplete" },
+                        ]
+                    }
+                ]
+            });
+            chart.render();
+        };
+    </script>
+</body>
+
+</html>
