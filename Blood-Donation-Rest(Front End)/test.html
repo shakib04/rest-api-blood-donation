@@ -15,10 +15,36 @@
 
     </div>
 
+
     <button id="assign">Assign(Index)</button> <br>
     <button id="href">Href(Index)</button> <br>
+
+
+    <p class="h5" id="msg"></p>
+    <div id="all_forms">
+        <input type="text" name="" id=""> <br>
+        <input type="text" name="" id=""> <br>
+        <input type="text" name="" id=""> <br>
+        <input type="text" name="" id=""> <br>
+        <button value="btn" id="validationBtn">Test Value</button>
+    </div>
+
     <script src="js/jquery-3.6.0.js"></script>
     <script>
+
+        $("#validationBtn").click(function () {
+            var all_input = $("#all_forms :input");
+            console.log(all_input);
+            for (let i = 0; i < all_input.length; i++) {
+                const element = all_input[i];
+                console.log($(element).val());
+                if ($(element).val() == "" ) {
+                    $("#msg").html("<span style='color:red;'>Fill All Fields</span>");
+                    return;
+                }
+            }
+        });
+
         $("#upload_image_btn").click(function () {
             var link = $("#image_input").val();
             console.log(link);

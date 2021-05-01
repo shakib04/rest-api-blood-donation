@@ -35,7 +35,22 @@ function loadPosts() {
 
 //create post
 $("#create_Post_btn").click(function () {
-    console.log($("#HospitalName").val());
+    //validation 
+    var all_input = $("#create-post :input");
+    console.log(all_input);
+    for (let i = 0; i < all_input.length; i++) {
+        const element = all_input[i];
+        //console.log($(element).val());
+        //var arrIndextoClear = 
+        if ($(element).val() == "") {
+            $("#validationMsg").html("<span style='color:red;'>Fill All Fields</span>");
+            return;
+        }
+    }
+
+    $("#validationMsg").html("<span style='color:green;'>All Filed</span>");
+
+
     $.ajax({
         url: "http://localhost:10793/api/posts",
         method: "POST",
@@ -56,6 +71,14 @@ $("#create_Post_btn").click(function () {
                 $("#create_post_show").toggle();
                 $("#post-list").toggle();
                 $("#create-post").toggle();
+                for (let i = 0; i < all_input.length; i++) {
+                    const element = all_input[i];
+                    if ($(element).hasClass("btn")) {
+                        continue;
+                    } else {
+                        $(element).val("");
+                    }
+                }
             } else {
                 $("#msg").html(xmlHttp.status + ":" + xmlHttp.statusText);
             }
