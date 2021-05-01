@@ -9,6 +9,16 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>All Post</title>
 	<link rel="stylesheet" href="css/bootstrap.css">
+	<style>
+		.dd {
+			text-align: center;
+			width: 50%;
+			margin: auto;
+			border: 2px solid rgb(0, 0, 0);
+			padding: 5px;
+		}
+
+	</style>
 
 </head>
 
@@ -18,7 +28,7 @@
 
 
 
-	<div id="login_wrap">
+	<div id="login_wrap" class="dd">
 		<h2>Login Page</h2>
 		<br />
 		<input type="Email" class="form-control" name="Email" id="inputEamil" placeholder="Email">
@@ -47,7 +57,8 @@
 			}
 
 			$.ajax({
-				url: "http://localhost:10793/api/user/login?email=" + $("#inputEamil").val() + "&pass=" + $("#inputPassword").val(),
+				url: "http://localhost:10793/api/user/login?email=" + $("#inputEamil").val() + "&pass=" + $(
+					"#inputPassword").val(),
 				method: "GET",
 				complete: function (xmlHttp, status) {
 					if (xmlHttp.status == 200) {
@@ -77,6 +88,7 @@
 			$("#inputEamil").val("s@mail.com");
 			$("#inputPassword").val("1");
 		});
+
 	</script>
 
 </body>

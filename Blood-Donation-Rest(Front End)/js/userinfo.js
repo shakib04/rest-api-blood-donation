@@ -23,6 +23,16 @@ $(document).ready(function () {
 // })
 
 $("#User_Registration_Btn").click(function () {
+    //validation 
+    var all_input = $("#User_Reg_Form :input");
+    for (let i = 0; i < all_input.length; i++) {
+        const element = all_input[i];
+        if ($(element).val() == "") {
+            $("#validationMsg").html("<span style='color:red;'>Fill All Fields</span>");
+            return;
+        }
+    }
+
     $.ajax({
         url: "http://localhost:10793/api/userReg",
         method: "POST",
