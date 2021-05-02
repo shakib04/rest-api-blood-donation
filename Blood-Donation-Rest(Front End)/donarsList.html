@@ -105,8 +105,11 @@
                                 "</td><td>" + data[i].Address +
                                 "</td><td>" + data[i].DOB +
                                 "</td><td>" + data[i].LastDonate +
-                                "</td><td><button onclick='GetIdOfDonor(this)' id='request_blood' value='" + data[i].UserId + "'  class='flag-post btn btn-secondary'>Request Blood</button>" +
-                                "</td><td><button onclick='GetElement(this)' id='test-flag' value='" + data[i].UserId + "'  class='flag-post btn btn-danger'>Report User</button>" +
+                                "</td><td><button onclick='GetIdOfDonor(this)' id='request_blood' value='" +
+                                data[i].UserId +
+                                "'  class='flag-post btn btn-secondary'>Request Blood</button>" +
+                                "</td><td><button onclick='GetElement(this)' id='test-flag' value='" + data[
+                                    i].UserId + "'  class='flag-post btn btn-danger'>Report User</button>" +
                                 "</td></tr>";
                         }
                         $("#donar_list_tbl tbody").html(str);
@@ -144,7 +147,7 @@
                 data: {
                     "Request_Message": $("#Request_Message").val(),
                     "DonarId": donorToRequest,
-                    "UserId": userIdInSession
+                    "UserId": localStorage.getItem("userId")
                 },
                 complete: function (xmlHttp, status) {
                     if (xmlHttp.status == 201) {
@@ -157,7 +160,6 @@
                 }
             });
         })
-
 
     </script>
 </body>

@@ -13,7 +13,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light"></nav>
 
     <p class="h4">My Request For Blood</p>
-    <div>
+    <div id="list_of_donors">
         <table class="table" id="request_blood_tbl">
             <thead>
                 <tr>
@@ -40,11 +40,29 @@
         </table>
     </div>
 
+    <div id="donar_details" style="display: none;">
+        <p class="text-center h5">Primary Info</p>
+        <table class="table" id="primary_info_tbl">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Info</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Profile is loading...</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
     <script src="js/jquery-3.6.0.js"></script>
     <script src="js/default.js"></script>
 
     <script>
         outIfNotLogIn();
+
         function loadRequests() {
             console.log(userIdInSession);
             $.ajax({
@@ -60,8 +78,12 @@
                                 "</td><td>" + data[i].Request_Message +
                                 "</td><td>" + data[i].userInfoDonar.BloodGroup +
                                 "</td><td>" + data[i].DonationReplies +
-                                "</td><td><button onclick='GetIdOfDonor(this)' id='request_blood' value='" + data[i].UserId + "'  class='flag-post btn btn-secondary'>Donar Profile</button>" +
-                                "</td><td><button style='display:none;' onclick='GetElement(this)' id='test-flag' value='" + data[i].UserId + "'  class='flag-post btn btn-danger'>Report User</button>" +
+                                "</td><td><button onclick='GetIdOfDonor(this)' id='request_blood' value='" +
+                                data[i].DonarId +
+                                "'  class='flag-post btn btn-secondary'>Donar Profile</button>" +
+                                "</td><td><button style='display:none;' onclick='GetElement(this)' id='test-flag' value='" +
+                                data[i].UserId +
+                                "'  class='flag-post btn btn-danger'>Report User</button>" +
                                 "</td></tr>";
                         }
                         $("#request_blood_tbl tbody").html(str);
@@ -71,6 +93,39 @@
         }
 
         loadRequests();
+
+
+        function GetIdOfDonor(element) {
+            $.ajax({
+                url: "http://localhost:10793/api/profile/" + element.value,
+                method: "GET",
+                complete: function (xmlHttp, status) {
+                    //document.write(xmlHttp.responseText);
+                    if (xmlHttp.status == 200) {
+                        var str = '';
+                        data = xmlHttp.responseJSON;
+                        console.log(data);
+                        str += "<tr><td>Name</td><td>" + data.Name + "</td></tr>" +
+                            "<tr><td>Age</td><td>" + _calculateAge(data.DOB) + "</td></tr>" +
+                            "<tr><td>Phone</td><td>" + data.Phone + "</td></tr>" +
+                            "<tr><td>Blood Group</td><td>" + data.BloodGroup + "</td></tr>" +
+                            "<tr><td>Address</td><td>" + data.Address + "</td></tr>";
+                        $("#primary_info_tbl tbody").html(str);
+                        $("#donar_details").toggle();
+                        $("#list_of_donors").toggle();
+                    }
+                }
+            });
+        }
+
+        function _calculateAge(birthday) {
+            birthday = birthday.split('T')[0];
+            console.log(birthday);
+            var ageDifMs = Date.now() - Date.parse(birthday);
+            var ageDate = new Date(ageDifMs);
+            return Math.abs(ageDate.getUTCFullYear() - 1970);
+        }
+
     </script>
 </body>
 
