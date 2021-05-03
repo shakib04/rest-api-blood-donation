@@ -103,7 +103,7 @@
                                 "</td><td>" + data[i].BloodGroup +
                                 "</td><td>" + data[i].Phone +
                                 "</td><td>" + data[i].Address +
-                                "</td><td>" + data[i].DOB +
+                                "</td><td>" + _calculateAge(data[i].DOB) +
                                 "</td><td>" + data[i].LastDonate +
                                 "</td><td><button onclick='GetIdOfDonor(this)' id='request_blood' value='" +
                                 data[i].UserId +
@@ -161,7 +161,18 @@
             });
         })
 
+        function _calculateAge(birthday) {
+            birthday = birthday.split('T')[0];
+            console.log(birthday);
+            var ageDifMs = Date.now() - Date.parse(birthday);
+            var ageDate = new Date(ageDifMs);
+            return Math.abs(ageDate.getUTCFullYear() - 1970);
+        }
+
     </script>
 </body>
 
 </html>
+
+
+//intro (opencv2)

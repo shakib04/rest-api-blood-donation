@@ -14,7 +14,7 @@ function loadPrimayInfo() {
                 var str = '';
                 data = xmlHttp.responseJSON;
                 proPicName = data.ProPic;
-                $("#propic").prepend('<img src="http://localhost:10793/UploadedFiles/' + proPicName + '" alt="">');
+                $("#propic").html('<img src="http://localhost:10793/UploadedFiles/' + proPicName + '" alt="">');
                 console.log(data);
                 str += "<tr><td>Id</td><td>" + data.UserId + "</td></tr>"
                     + "<tr><td>Name</td><td>" + data.Name + "</td></tr>"
@@ -72,6 +72,18 @@ function FillEditForm() {
 }
 
 $("#save_primary_btn").click(function () {
+    //validation 
+    var all_input = $("#Edit_Profile_Form :input");
+    for (let i = 0; i < all_input.length; i++) {
+        const element = all_input[i];
+        if ($(element).val() == "") {
+            $("#validationMsg").html("<span style='color:red;'>Fill All Fields</span>");
+            return;
+        }
+    }
+
+    $("#validationMsg").html("<span style='color:green;'>All Filed</span>");
+
     $.ajax({
         url: "http://localhost:10793/api/profile/" + localStorage.getItem("userId"),
         method: "PUT",

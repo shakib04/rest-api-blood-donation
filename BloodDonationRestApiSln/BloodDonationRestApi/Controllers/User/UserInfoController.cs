@@ -116,6 +116,7 @@ namespace BloodDonationRestApi.Controllers
                 {
                     // Validate the uploaded image(optional)
 
+
                     // Get the complete file path
                     var fileSavePath = Path.Combine(HttpContext.Current.Server.MapPath("~/UploadedFiles"), id + extension);
 
