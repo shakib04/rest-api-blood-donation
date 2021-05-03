@@ -8,7 +8,7 @@ var navBar = '<div class="collapse navbar-collapse" id="navbarNav">'
     + '<li class="nav-item"><a class="nav-link" href="report2.html">Information</a></li>'
     + '<li class="nav-item"><a class="nav-link" href="blood_book.html">Blood Book</a></li>'
     + '<li class="nav-item"><a class="nav-link" onclick="Logout(this)" href="#">Logout</a></li>'
-    + '<li class="nav-item"><a class="nav-link" href="#">Funding</a></li>'
+    + '<li class="nav-item"><a class="nav-link" href="funding.html">Funding</a></li>'
     + '</ul></div > ';
 
 var navBarWithOutLogin = '<a class="navbar-brand" href="index.html">Home</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button><div class="collapse navbar-collapse" id="navbarNav">'
@@ -16,7 +16,7 @@ var navBarWithOutLogin = '<a class="navbar-brand" href="index.html">Home</a><but
     + '<li class="nav-item active"><a class="nav-link" href="donarslist.html">Donars <span class="sr-only">(current)</span></a></li>'
     + '<li class="nav-item active"><a class="nav-link" href="post.html">Posts <span class="sr-only">(current)</span></a></li>'
     + '<li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>'
-    + '<li class="nav-item"><a class="nav-link" href="#">Funding</a></li>'
+    + '<li class="nav-item"><a class="nav-link" href="funding.html">Funding</a></li>'
     + '</ul></div > ';
 
 if (localStorage.getItem("userId") == null) {

@@ -64,6 +64,15 @@ $("#update_Post_btn").click(function () {
     postUpdate(idToUpdate);
 })
 function postUpdate(element) {
+    //validation 
+    var all_input = $("#update_post :input");
+    for (let i = 0; i < all_input.length; i++) {
+        const element = all_input[i];
+        if ($(element).val() == "") {
+            $("#validationMsg").html("<span style='color:red;'>Fill All Fields</span>");
+            return;
+        }
+    }
     $.ajax({
         url: "http://localhost:10793//api/posts/" + element,
         method: "PUT",

@@ -31,6 +31,15 @@ function loadBookList(bgroup = "") {
 
 
 function createBB() {
+    //validation 
+    var all_input = $("#book_forms :input");
+    for (let i = 0; i < all_input.length; i++) {
+        const element = all_input[i];
+        if ($(element).val() == "") {
+            $("#validationMsg").html("<span style='color:red;'>Fill All Fields</span>");
+            return;
+        }
+    }
     $.ajax({
         url: "http://localhost:10793/api/b_book/",
         method: "POST",
@@ -47,6 +56,7 @@ function createBB() {
                 loadBookList();
                 $("#list_of_bb_wrap").toggle();
                 $("#book_forms").toggle();
+                clearField();
             } else {
 
             }
@@ -116,6 +126,16 @@ $("#bb_update").click(function () {
     bbUpdate(idToUpdate);
 })
 function bbUpdate(id) {
+    //validation 
+    var all_input = $("#book_forms :input");
+    for (let i = 0; i < all_input.length; i++) {
+        const element = all_input[i];
+        if ($(element).val() == "") {
+            $("#validationMsg").html("<span style='color:red;'>Fill All Fields</span>");
+            return;
+        }
+    }
+
     $.ajax({
         url: "http://localhost:10793/api/b_book/" + id,
         method: "PUT",

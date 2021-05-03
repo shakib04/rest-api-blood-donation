@@ -2,6 +2,8 @@ outIfNotLogIn();
 var data = "";
 loadPrimayInfo();
 
+var proPicName = "";
+
 function loadPrimayInfo() {
     $.ajax({
         url: "http://localhost:10793/api/profile/" + localStorage.getItem("userId"),
@@ -11,6 +13,8 @@ function loadPrimayInfo() {
             if (xmlHttp.status == 200) {
                 var str = '';
                 data = xmlHttp.responseJSON;
+                proPicName = data.ProPic;
+                $("#propic").html('<img src="http://localhost:10793/UploadedFiles/' + proPicName + '" alt="">');
                 console.log(data);
                 str += "<tr><td>Id</td><td>" + data.UserId + "</td></tr>"
                     + "<tr><td>Name</td><td>" + data.Name + "</td></tr>"
@@ -19,11 +23,12 @@ function loadPrimayInfo() {
                     + "<tr><td>Phone</td><td>" + data.Phone + "</td></tr>"
                     + "<tr><td>Type</td><td>" + data.Type + "</td></tr>"
                     + "<tr><td>Blood Group</td><td>" + data.BloodGroup + "</td></tr>"
-                    + "<tr><td>Gender</td><td>" + data.Gender + "</td></tr>"
-                    + "<tr><td>NID</td><td>" + data.NID + "</td></tr>"
-                    + "<tr><td>Social Profile</td><td>" + data.Social_Profile + "</td></tr>"
                     + "<tr><td>Address</td><td>" + data.Address + "</td></tr>";
                 $("#primary_info_tbl tbody").html(str);
+                $("#others_info_tbl tbody").html("<tr><td>Gender</td><td>" + data.Gender + "</td></tr>"
+                    + "<tr><td>NID</td><td>" + data.NID + "</td></tr>"
+                    + "<tr><td>Social Profile</td><td>" + data.Social_Profile + "</td></tr>");
+                profileReportLoad();
             }
         }
     });
@@ -46,15 +51,17 @@ function EditProfile() {
 $("#Edit_Profile_btn").click(function () {
 
     $("#primary_info_tbl").toggle();
-    if ($(this).text() == "Edit Profile") {
+    $("#others_info_tbl").toggle();
+    $("#Edit_Profile_others_btn").toggle();
+    if ($(this).text() == "Edit Primary Info") {
         $(this).text("Back to Profile");
     } else {
-        $(this).text("Edit Profile");
+        $(this).text("Edit Primary Info");
     }
     FillEditForm();
     $("#Edit_Profile_Form").toggle();
 
-})
+});
 
 function FillEditForm() {
     $("#Name").val(data.Name);
@@ -65,8 +72,20 @@ function FillEditForm() {
 }
 
 $("#save_primary_btn").click(function () {
+    //validation 
+    var all_input = $("#Edit_Profile_Form :input");
+    for (let i = 0; i < all_input.length; i++) {
+        const element = all_input[i];
+        if ($(element).val() == "") {
+            $("#validationMsg").html("<span style='color:red;'>Fill All Fields</span>");
+            return;
+        }
+    }
+
+    $("#validationMsg").html("<span style='color:green;'>All Filed</span>");
+
     $.ajax({
-        url: "http://localhost:10793//api/profile/" + localStorage.getItem("userId"),
+        url: "http://localhost:10793/api/profile/" + localStorage.getItem("userId"),
         method: "PUT",
         headers: "Content-Type:application/json",
         data: {
@@ -95,3 +114,5 @@ function ClearEditForm() {
     $("#Address").val("");
     $("#BloodGroup").val("");
 }
+
+

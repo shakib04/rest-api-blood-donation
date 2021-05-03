@@ -15,6 +15,7 @@
 
     </div>
 
+    <img src="" alt="">
 
     <button id="assign">Assign(Index)</button> <br>
     <button id="href">Href(Index)</button> <br>
@@ -31,14 +32,13 @@
 
     <script src="js/jquery-3.6.0.js"></script>
     <script>
-
         $("#validationBtn").click(function () {
             var all_input = $("#all_forms :input");
             console.log(all_input);
             for (let i = 0; i < all_input.length; i++) {
                 const element = all_input[i];
                 console.log($(element).val());
-                if ($(element).val() == "" ) {
+                if ($(element).val() == "") {
                     $("#msg").html("<span style='color:red;'>Fill All Fields</span>");
                     return;
                 }
@@ -58,6 +58,86 @@
         $("#href").click(function () {
             location.href = "index.html";
         });
+
+
+        function name() {
+            // Create a request variable and assign a new XMLHttpRequest object to it.
+            var request = new XMLHttpRequest()
+
+            // Open a new connection, using the GET request on the URL endpoint
+            request.open('GET', 'https://jsonmock.hackerrank.com/api/football_matches?year=2011&team1=Barcelona&page=1',
+                true)
+
+            request.onload = function () {
+                // Begin accessing JSON data here
+                var data = JSON.parse(this.response)
+
+                console.log(data);
+                // data.forEach((movie) => {
+                //     // Log each movie's title
+                //     console.log(movie.title)
+                //})
+            }
+
+            // Send request
+            request.send()
+        }
+
+        name();
+
+        function loadDoc() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("demo").innerHTML = this.responseText;
+                }
+            };
+            xhttp.open("GET", "https://jsonmock.hackerrank.com/api/football_matches?year=2011&team1=Barcelona&page=1",
+                true);
+            xhttp.send();
+        }
+
+
+        // $(document).ready(function () {
+        //     var totalGoals = 0;
+        //     $.ajax({
+        //         url: "https://jsonmock.hackerrank.com/api/football_matches?year=2011&team1=Barcelona&page=1",
+        //         method: "GET",
+        //         complete: function (xmlHttp, status) {
+        //             //document.write(xmlHttp.responseText);
+        //             if (xmlHttp.status == 200) {
+        //                 var str = '';
+
+        //                 var data = xmlHttp.responseJSON;
+        //                 console.log(data.data);
+        //                 for (let i = 0; i < data.data.length; i++) {
+
+        //                     totalGoals += parseInt(data.data[i].team1goals);
+        //                 }
+        //                 $("#tblUserList tbody").html(str);
+        //             }
+        //             console.log(totalGoals);
+        //         }
+        //     });
+        //     $.ajax({
+        //         url: "https://jsonmock.hackerrank.com/api/football_matches?year=2011&team2=Barcelona&page=1",
+        //         method: "GET",
+        //         complete: function (xmlHttp, status) {
+        //             //document.write(xmlHttp.responseText);
+        //             if (xmlHttp.status == 200) {
+        //                 var str = '';
+        //                 var data = xmlHttp.responseJSON;
+        //                 console.log(data.data);
+        //                 for (let i = 0; i < data.data.length; i++) {
+        //                     totalGoals += parseInt(data.data[i].team2goals);
+        //                 }
+        //                 $("#tblUserList tbody").html(str);
+        //             }
+        //             console.log(totalGoals);
+        //         }
+        //     });
+        // });
+
     </script>
 </body>
 

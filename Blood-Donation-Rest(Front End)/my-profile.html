@@ -6,14 +6,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/bootstrap.css">
+    <style>
+        #propic>img {
+            width: 250px;
+            height: 250px;
+        }
+
+    </style>
     <title>Document</title>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light"></nav>
 
+    <div>
+        <div id="propic">
 
-    <p class="text-center">Primary Info</p>
+        </div>
+        <p><a href="file_upload.html">Change Profile Picture</a></p>
+    </div>
+
+
+
+    <p class="text-center h5">Primary Info</p>
     <table class="table" id="primary_info_tbl">
         <thead>
             <tr>
@@ -23,27 +38,36 @@
         </thead>
         <tbody>
             <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-
+                <td>Profile is loading...</td>
             </tr>
         </tbody>
     </table>
+    <button value="" id="Edit_Profile_btn" class="btn btn-secondary">Edit Primary Info</button>
 
-    <button value="" id="Edit_Profile_btn" class="btn btn-secondary">Edit Profile</button>
+    <div style="display: none;">
+        <p class="text-center h5">Others Info</p>
+
+        <table class="table" id="others_info_tbl">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Info</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Profile is loading...</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button value="" id="Edit_Profile_others_btn" class="btn btn-secondary">Edit Ohters
+            Info</button>
+    </div>
+
 
     <div id="Edit_Profile_Form" style="display: none;">
-
+        <div id="validationMsg"></div>
         <div class="form-group">
             <label class="control-label col-md-2" for="Name">Name</label>
             <div class="col-md-10">
@@ -108,52 +132,49 @@
     </div>
     </div>
 
-    <script src="js/jquery-3.6.0.js"></script>
-    <script src="js/default.js"></script>
-    <script src="js/my-profile.js"></script>
+
 
     <div id="chartContainer" style="height: 370px; width: 100%;"></div>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
     <script type="text/javascript">
+        function profileReportLoad() {
+            var count = 0;
+            if (data.Name == null) {
+                count++;
+            }
 
-        var count = 0;
-        if (data.Name == null) {
-            count++;
-        }
+            if (data.Phone == null) {
+                count++;
+            }
+            if (data.ProPic == null) {
+                count++;
+            }
+            if (data.Gender == null) {
+                count++;
+            }
+            if (data.Email == null) {
+                count++;
+            }
 
-        if (data.Phone == null) {
-            count++;
-        }
-        if (data.ProPic == null) {
-            count++;
-        }
-        if (data.Gender == null) {
-            count++;
-        }
-        if (data.Email == null) {
-            count++;
-        }
+            if (data.DOB == null) {
+                count++;
+            }
+            if (data.Address == null) {
+                count++;
+            }
+            if (data.BloodGroup == null) {
+                count++;
+            }
+            if (data.NID == null) {
+                count++;
+            }
+            if (data.Social_Profile == null) {
+                count++;
+            }
+            var incomplete = (count * 100) / 10;
+            var completePercentage = 100 - incomplete;
 
-        if (data.DOB == null) {
-            count++;
-        }
-        if (data.Address == null) {
-            count++;
-        }
-        if (data.BloodGroup == null) {
-            count++;
-        }
-        if (data.NID == null) {
-            count++;
-        }
-        if (data.Social_Profile == null) {
-            count++;
-        }
-        var incomplete = (count * 100) / 10;
-        var completePercentage = 100 - incomplete;
-
-        window.onload = function () {
             var chart = new CanvasJS.Chart("chartContainer", {
                 title: {
                     text: "Your Profile Completion"
@@ -166,27 +187,35 @@
                     fontFamily: "Helvetica"
                 },
                 theme: "light2",
-                data: [
-                    {
-                        type: "pie",
-                        indexLabelFontFamily: "Garamond",
-                        indexLabelFontSize: 20,
-                        indexLabel: "{label} {y}%",
-                        startAngle: -20,
-                        showInLegend: true,
-                        toolTipContent: "{legendText} {y}%",
-                        dataPoints: [
-                            {
-                                y: completePercentage, legendText: "Profile Complete", label: "Profile Complete"
-                            },
-                            { y: incomplete, legendText: "Incomplete", label: "Incomplete" },
-                        ]
-                    }
-                ]
+                data: [{
+                    type: "pie",
+                    indexLabelFontFamily: "Garamond",
+                    indexLabelFontSize: 20,
+                    indexLabel: "{label} {y}%",
+                    startAngle: -20,
+                    showInLegend: true,
+                    toolTipContent: "{legendText} {y}%",
+                    dataPoints: [{
+                            y: completePercentage,
+                            legendText: "Profile Complete",
+                            label: "Profile Complete"
+                        },
+                        {
+                            y: incomplete,
+                            legendText: "Incomplete",
+                            label: "Incomplete"
+                        },
+                    ]
+                }]
             });
             chart.render();
-        };
+
+        }
+
     </script>
+    <script src="js/jquery-3.6.0.js"></script>
+    <script src="js/default.js"></script>
+    <script src="js/my-profile.js"></script>
 </body>
 
 </html>

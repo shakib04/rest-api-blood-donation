@@ -33,6 +33,11 @@ function loadPosts() {
 }
 
 
+function inputValidation() {
+
+}
+
+
 //create post
 $("#create_Post_btn").click(function () {
     //validation 
@@ -107,24 +112,7 @@ $("#update_post_btn").click(function () {
     }
 });
 
-function postUpdate() {
-    $.ajax({
-        url: "http://localhost:10793//api/posts/" + $("#post_id_search_delete").val(),
-        method: "PUT",
-        headers: "Content-Type:application/json",
-        data: {
-            "HospitalName": $("#HospitalName").val(),
-            "Address": $("#Address").val(),
-            "WantedBlood": $("#WantedBlood").val(),
-            "ContactNumber": $("#ContactNumber").val(),
-            "Text": $("#Text").val(),
-        },
-        success: function (result) {
-            $("#post_id_search_delete").val("")
-            loadPosts();
-        }
-    });
-}
+
 
 function getById() {
     $.ajax({
