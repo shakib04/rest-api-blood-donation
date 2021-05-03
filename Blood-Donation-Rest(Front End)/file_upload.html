@@ -24,8 +24,9 @@
             $('#btnUploadFile').on('click', function () {
 
                 var data = new FormData();
-
+                console.log(data);
                 var files = $("#fileUpload").get(0).files;
+                console.log(files);
 
                 // Add the uploaded image content to the form data collection
                 if (files.length > 0) {

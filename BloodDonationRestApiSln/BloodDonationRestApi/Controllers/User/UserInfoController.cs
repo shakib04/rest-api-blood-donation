@@ -8,6 +8,7 @@ using BloodDonationRestApi.Models;
 using System.Drawing;
 using System.Web;
 using System.IO;
+using BloodDonationRestApi.Attributes;
 
 namespace BloodDonationRestApi.Controllers
 {
@@ -15,7 +16,7 @@ namespace BloodDonationRestApi.Controllers
     {
         BloodDonationContext context = new BloodDonationContext();
 
-        [HttpGet, Route("api/users")]
+        [HttpGet, Route("api/users"), Auth]
         public IHttpActionResult GetAllUser()
         {
             return Ok(context.UserInfos.ToList());
