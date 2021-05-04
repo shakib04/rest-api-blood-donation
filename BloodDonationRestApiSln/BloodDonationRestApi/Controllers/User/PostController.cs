@@ -1,4 +1,5 @@
-﻿using BloodDonationRestApi.Models;
+﻿using BloodDonationRestApi.Attributes;
+using BloodDonationRestApi.Models;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -25,8 +26,8 @@ namespace BloodDonationRestApi.Controllers
             return Ok(context.Posts.Find(id));
         }
 
-        [HttpPost, Route("api/posts")]
-        public IHttpActionResult CreatePost(Post p)
+        [HttpPost, Route("api/posts"), Auth]
+        public IHttpActionResult Post(Post p)
         {
             p.Time = DateTime.Now;
             context.Posts.Add(p);

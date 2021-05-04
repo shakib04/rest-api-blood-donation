@@ -16,13 +16,186 @@
 
         <h3>You can support our project by your donation.</h3>
         <h4>Donate to Save This Project</h4>
-        <p class="text-box"><button class="btn btn-primary">Add Fund</button></p>
+        <p class="text-box"><button id="add_fund_btn" class="btn btn-primary">Add Fund</button></p>
+
+
     </div>
 
-    
+    <h3 class="text-success text-center" id="tnxMsg"></h3>
+
+    <div class="fund_user_details" style="display: none;">
+        <div class="form-horizontal">
+            <h4>Enter Details to Complete Your Transaction</h4>
+            <hr />
+
+            <div class="form-group">
+                <label class="control-label col-md-2" for="Amount">Amount(Taka)</label>
+                <div class="col-md-10">
+                    <input class="form-control text-box single-line" data-val="true"
+                        data-val-number="The field Amount(Taka) must be a number."
+                        data-val-required="The Amount(Taka) field is required." id="Amount" name="Amount" type="number"
+                        value="" />
+                    <span class="field-validation-valid text-danger" data-valmsg-for="Amount"
+                        data-valmsg-replace="true"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" for="MoneySource">Money Source</label>
+                <div class="col-md-10">
+                    <select id="MoneySource" class="form-control" name="MoneySource" id="exampleFormControlSelect1">
+                        <option>Bkash</option>
+                    </select>
+
+                    <span class="field-validation-valid text-danger" data-valmsg-for="MoneySource"
+                        data-valmsg-replace="true"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" for="Name">Name</label>
+                <div class="col-md-10">
+                    <input type="text" name="Name" class="form-control" id="Name" />
+                    <span class="field-validation-valid text-danger" data-valmsg-for="Name"
+                        data-valmsg-replace="true"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" for="UserEmail">Your Email</label>
+                <div class="col-md-10">
+                    <input id="UserEmail" type="email" name="UserEmail" class="form-control" />
+
+                    <span class="field-validation-valid text-danger" data-valmsg-for="UserEmail"
+                        data-valmsg-replace="true"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" for="YourMessage">Your Message</label>
+                <div class="col-md-10">
+                    <input class="form-control text-box single-line" id="YourMessage" name="YourMessage" type="text"
+                        value="" />
+                    <span class="field-validation-valid text-danger" data-valmsg-for="YourMessage"
+                        data-valmsg-replace="true"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" id="Add_Payment_Info_btn" value="Add Payment Info" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- <table>
+        <tr>
+            <td>Amount: </td>
+            <td>100</td>
+        </tr>
+        <tr>
+            <td>Name: </td>
+            <td>Mr. Joy </td>
+        </tr>
+        <tr>
+            <td>Email: </td>
+            <td>s@mail.com</td>
+        </tr>
+        <tr>
+            <td>Medium: </td>
+            <td>Bkash</td>
+        </tr>
+    </table> -->
+
+
+
+    <div id="conf_payment_wrap" style="display: none;">
+        <div class="text-danger" id="conf_error"></div>
+        <h4>Confirm Payment</h4>
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Select Payment Method</label>
+            <select required class="form-control" id="exampleFormControlSelect1">
+                <option>Bkash</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputEmail1">Bkash Number</label>
+            <input name="MobileNumber" type="number" class="form-control" id="MobileNumber" aria-describedby="emailHelp"
+                placeholder="Enter Mobile Number">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your Details with anyone else.</small>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">PIN</label>
+            <input name="pin" type="password" class="form-control" id="pin" placeholder="Enter 4 Digit PIN">
+        </div>
+
+
+
+        <button type="submit" class="btn btn-primary" id="ConfirmBtn">Confirm</button>
+        <p class="text-danger"></p>
+    </div>
+
+
 
     <script src="js/jquery-3.6.0.js"></script>
     <script src="js/default.js"></script>
+
+    <script>
+        $("#add_fund_btn").click(function () {
+            $("#fund_wrap").toggle();
+            $(".fund_user_details").toggle();
+        });
+
+        $("#Add_Payment_Info_btn").click(function () {
+            var user_data = {
+                "Amount": $("#Amount").val()
+            }
+            console.log(user_data);
+            $(".fund_user_details").toggle();
+            $("#conf_payment_wrap").toggle();
+        });
+
+
+        $("#ConfirmBtn").click(function () {
+            if ($("#MobileNumber").val() == "" || $("#pin").val() == "") {
+                $("#conf_error").text("Fill All Details");
+                return;
+            }
+            $("#conf_error").text("");
+
+            $.ajax({
+                url: "http://localhost:10793/api/funding",
+                method: "POST",
+                //headers: "Content-Type:application/json",
+                dataType: 'json',
+                headers: {
+                    "Authorization": "Basic " + btoa(localStorage.getItem("email") + ":" + localStorage.getItem("password")),
+                },
+                data: {
+                    "Amount": $("#Amount").val(),
+                    "MoneySource": $("#MoneySource").val(),
+                    "UserEmail": $("#UserEmail").val(),
+                    "Name": $("#Name").val(),
+                    "YourMessage": $("#YourMessage").val()
+                },
+                complete: function (xmlHttp, status) {
+
+                    if (xmlHttp.status == 201) {
+                        //location.replace("funding.html");
+                        $("#tnxMsg").text("Thanks for your support");
+                        $("#conf_payment_wrap").toggle();
+
+                    } else {
+
+                    }
+                }
+            });
+        });
+
+    </script>
 </body>
 
 </html>

@@ -20,7 +20,6 @@
 			border: 2px solid rgb(0, 0, 0);
 			padding: 5px;
 		}
-
 	</style>
 
 </head>
@@ -71,8 +70,13 @@
 						localStorage.setItem("userId", data[0].UserId);
 						userIdInSession = localStorage.getItem("userId");
 						localStorage.setItem("type", data[0].Type);
+						localStorage.setItem("password", data[0].Password);
+						localStorage.setItem("email", data[0].Email);
 						if (data[0].Type.toLowerCase() == "user") {
 							location.replace("dashboard.html");
+							console.log(localStorage.getItem("email"));
+							console.log(localStorage.getItem("password"));
+							console.log(data);
 						}
 
 					} else if (xmlHttp.status == 204) {
@@ -81,8 +85,6 @@
 					//console.log(xmlHttp.responseText); 
 				}
 			})
-
-			console.log("test");
 		});
 
 

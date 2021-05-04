@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BloodDonationRestApi.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -14,6 +15,8 @@ namespace BloodDonationRestApi.Attributes
 {
     public class Auth: AuthorizationFilterAttribute
     {
+        BloodDonationContext context = new BloodDonationContext();
+
         public override void OnAuthorization(HttpActionContext actionContext)
         {
             base.OnAuthorization(actionContext);
@@ -29,7 +32,7 @@ namespace BloodDonationRestApi.Attributes
                 string[] splittedText = decoded.Split(new char[] { ':' });
                 string username = splittedText[0];
                 string password = splittedText[1];
-                if (username == "admin" && password == "123")
+                if (context.UserInfos.Any(x=>x.Email == username && x.Password == password))
                 {
                     Thread.CurrentPrincipal = new GenericPrincipal(new GenericIdentity(username), null);
                 }

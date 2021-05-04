@@ -107,7 +107,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Attributes\Auth.cs" />
-    <Compile Include="Attributes\BasicAuthenticationAttribute.cs" />
+    <Compile Include="Controllers\User\DonationForSystemController.cs" />
     <Compile Include="Controllers\User\FlagPostController.cs" />
     <Compile Include="Controllers\User\PostController.cs" />
     <Compile Include="Controllers\User\UserInfoController.cs" />

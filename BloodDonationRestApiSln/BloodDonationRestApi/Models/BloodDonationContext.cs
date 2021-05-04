@@ -25,7 +25,6 @@ namespace BloodDonationRestApi.Models
         public DbSet<DonationForSystem> DonationForSystems { set; get; }
         //public DbSet<donorRating> donorRatings { set; get; }
         public DbSet<FlagPost> FlagPosts { set; get; }
-        //public DbSet<Link> links { set; get; }
         public DbSet<Report> Reports { set; get; }
         public DbSet<RequestBlood> RequestBloods { set; get; }
         public DbSet<DonationReply> DonationReply { set; get; }

@@ -10,9 +10,11 @@ namespace BloodDonationRestApi.Models
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int DonationId { get; set; }
+        [Required]
         public double Amount { get; set; }
         public string MoneySource { get; set; }
         public string Name { get; set; }
+        [Required]
         public string UserEmail { get; set; }
         public string YourMessage { get; set; }
     }
