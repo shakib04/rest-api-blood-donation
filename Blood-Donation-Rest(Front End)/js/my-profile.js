@@ -9,7 +9,6 @@ function loadPrimayInfo() {
     $.ajax({
         url: "http://localhost:10793/api/profile/" + localStorage.getItem("userId"),
         method: "GET",
-
         headers: {
             "Authorization": "Basic " + btoa(localStorage.getItem("email") + ":" + localStorage.getItem("password"))
         },

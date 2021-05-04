@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $.ajax({
-        url: "http://localhost:10793//api/Users",
+        url: "http://localhost:10793/api/Users",
         method: "GET",
         complete: function (xmlHttp, status) {
             //document.write(xmlHttp.responseText);

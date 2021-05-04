@@ -42,5 +42,6 @@ var userIdInSession = "";
 
 function Logout(element) {
     localStorage.removeItem("userId");
+    localStorage.clear();
     location.replace("index.html");
 }
