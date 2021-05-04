@@ -59,7 +59,11 @@ $("#create_Post_btn").click(function () {
     $.ajax({
         url: "http://localhost:10793/api/posts",
         method: "POST",
-        headers: "Content-Type:application/json",
+        //headers: "Content-Type:application/json",
+        dataType: 'json',
+        headers: {
+            "Authorization": "Basic " + btoa(localStorage.getItem("email") + ":" + localStorage.getItem("password")),
+        },
         data: {
             "HospitalName": $("#HospitalName").val(),
             "Address": $("#Address").val(),

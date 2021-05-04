@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using BloodDonationRestApi.Models;
+using BloodDonationRestApi.Attributes;
 
 namespace BloodDonationRestApi.Controllers.User
 {
@@ -12,7 +13,7 @@ namespace BloodDonationRestApi.Controllers.User
     {
         BloodDonationContext context = new BloodDonationContext();
 
-        [HttpGet, Route("api/profile/{id}")]
+        [HttpGet, Route("api/profile/{id}"), Auth]
         public IHttpActionResult ShowPrimaryInfo(int id)
         {
             if (context.UserInfos.Find(id) == null)
@@ -21,7 +22,7 @@ namespace BloodDonationRestApi.Controllers.User
             }
             return Ok(context.UserInfos.Find(id));
         }
-        [HttpPut, Route("api/profile/{id}")]
+        [HttpPut, Route("api/profile/{id}"), Auth]
         public IHttpActionResult EditProfilePrimary([FromBody]UserInfo user, [FromUri]int id)
         {
             var userToEdit = context.UserInfos.Find(id);

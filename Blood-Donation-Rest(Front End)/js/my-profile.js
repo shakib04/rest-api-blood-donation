@@ -5,9 +5,14 @@ loadPrimayInfo();
 var proPicName = "";
 
 function loadPrimayInfo() {
+    console.log((localStorage.getItem("email") + ":" + localStorage.getItem("password")));
     $.ajax({
         url: "http://localhost:10793/api/profile/" + localStorage.getItem("userId"),
         method: "GET",
+
+        headers: {
+            "Authorization": "Basic " + btoa(localStorage.getItem("email") + ":" + localStorage.getItem("password"))
+        },
         complete: function (xmlHttp, status) {
             //document.write(xmlHttp.responseText);
             if (xmlHttp.status == 200) {
@@ -85,9 +90,13 @@ $("#save_primary_btn").click(function () {
     $("#validationMsg").html("<span style='color:green;'>All Filed</span>");
 
     $.ajax({
+
         url: "http://localhost:10793/api/profile/" + localStorage.getItem("userId"),
         method: "PUT",
-        headers: "Content-Type:application/json",
+        dataType: 'json',
+        headers: {
+            "Authorization": "Basic " + btoa(localStorage.getItem("email") + ":" + localStorage.getItem("password")),
+        },
         data: {
             "Name": $("#Name").val(),
             "Address": $("#Address").val(),
