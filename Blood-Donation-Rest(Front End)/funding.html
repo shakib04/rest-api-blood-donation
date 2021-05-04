@@ -24,6 +24,8 @@
     <h3 class="text-success text-center" id="tnxMsg"></h3>
 
     <div class="fund_user_details" style="display: none;">
+        <div id="user_details_error" class="text-danger"></div>
+
         <div class="form-horizontal">
             <h4>Enter Details to Complete Your Transaction</h4>
             <hr />
@@ -72,7 +74,7 @@
             </div>
 
             <div class="form-group">
-                <label class="control-label col-md-2" for="YourMessage">Your Message</label>
+                <label class="control-label col-md-2" for="YourMessage">Your Message(optional)</label>
                 <div class="col-md-10">
                     <input class="form-control text-box single-line" id="YourMessage" name="YourMessage" type="text"
                         value="" />
@@ -142,60 +144,7 @@
 
     <script src="js/jquery-3.6.0.js"></script>
     <script src="js/default.js"></script>
-
-    <script>
-        $("#add_fund_btn").click(function () {
-            $("#fund_wrap").toggle();
-            $(".fund_user_details").toggle();
-        });
-
-        $("#Add_Payment_Info_btn").click(function () {
-            var user_data = {
-                "Amount": $("#Amount").val()
-            }
-            console.log(user_data);
-            $(".fund_user_details").toggle();
-            $("#conf_payment_wrap").toggle();
-        });
-
-
-        $("#ConfirmBtn").click(function () {
-            if ($("#MobileNumber").val() == "" || $("#pin").val() == "") {
-                $("#conf_error").text("Fill All Details");
-                return;
-            }
-            $("#conf_error").text("");
-
-            $.ajax({
-                url: "http://localhost:10793/api/funding",
-                method: "POST",
-                //headers: "Content-Type:application/json",
-                dataType: 'json',
-                headers: {
-                    "Authorization": "Basic " + btoa(localStorage.getItem("email") + ":" + localStorage.getItem("password")),
-                },
-                data: {
-                    "Amount": $("#Amount").val(),
-                    "MoneySource": $("#MoneySource").val(),
-                    "UserEmail": $("#UserEmail").val(),
-                    "Name": $("#Name").val(),
-                    "YourMessage": $("#YourMessage").val()
-                },
-                complete: function (xmlHttp, status) {
-
-                    if (xmlHttp.status == 201) {
-                        //location.replace("funding.html");
-                        $("#tnxMsg").text("Thanks for your support");
-                        $("#conf_payment_wrap").toggle();
-
-                    } else {
-
-                    }
-                }
-            });
-        });
-
-    </script>
+    <script src="js/fund.js"></script>
 </body>
 
 </html>

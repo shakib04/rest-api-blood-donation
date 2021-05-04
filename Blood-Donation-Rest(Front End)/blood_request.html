@@ -99,6 +99,11 @@
             $.ajax({
                 url: "http://localhost:10793/api/profile/" + element.value,
                 method: "GET",
+                dataType: 'json',
+                headers: {
+                    "Authorization": "Basic " + btoa(localStorage.getItem("email") + ":" +
+                        localStorage.getItem("password")),
+                },
                 complete: function (xmlHttp, status) {
                     //document.write(xmlHttp.responseText);
                     if (xmlHttp.status == 200) {
