@@ -45,3 +45,9 @@ function Logout(element) {
     localStorage.clear();
     location.replace("index.html");
 }
+
+function ReturnToDashboardIfLogin() {
+    if (localStorage.getItem("userId") != null) {
+        location.replace("dashboard.html");
+    }
+}

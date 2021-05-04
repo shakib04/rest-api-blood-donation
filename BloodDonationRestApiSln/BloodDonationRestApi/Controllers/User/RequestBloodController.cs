@@ -23,8 +23,9 @@ namespace BloodDonationRestApi.Controllers.User
         [HttpGet, Route("api/MyRequest/{id}")]
         public IHttpActionResult RequestADonor(int id)
         {
-            
-            return Ok(context.RequestBloods.Where(x=>x.UserId == id).ToList());
+            return Ok(context.RequestBloods.Where(x => x.UserId == id).ToList());
         }
+
+
     }
 }

@@ -15,8 +15,7 @@ function loadPosts() {
                 var data = xmlHttp.responseJSON;
                 console.log(data);
                 for (let i = 0; i < data.length; i++) {
-                    str += "<tr><td>" + data[i].PostId +
-                        "</td><td>" + data[i].HospitalName +
+                    str += "<tr><td>" + data[i].HospitalName +
                         "</td><td>" + data[i].Address +
                         "</td><td>" + data[i].WantedBlood +
                         "</td><td>" + data[i].ContactNumber +

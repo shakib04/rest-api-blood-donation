@@ -13,12 +13,18 @@ namespace BloodDonationRestApi.Models
         
         [Key]
         public int UserId { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         public string Password { get; set; }
+        [Required]
         public string Email { get; set; }
+        [Required]
         public string Phone { get; set; }
+        [Required]
         public string Address { get; set; }
         public System.DateTime DOB { get; set; }
+        [Required]
         public string Type { get; set; }
         public string Docoment { get; set; }
         public string ProPic { get; set; }

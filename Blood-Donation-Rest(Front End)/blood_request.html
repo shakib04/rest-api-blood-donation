@@ -64,7 +64,6 @@
         outIfNotLogIn();
 
         function loadRequests() {
-            console.log(userIdInSession);
             $.ajax({
                 url: "http://localhost:10793/api/MyRequest/" + localStorage.getItem("userId"),
                 method: "GET",

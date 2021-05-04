@@ -10,6 +10,7 @@ namespace BloodDonationRestApi.Models
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int replyId { get; set; }
+        [ForeignKey("RequestBlood")]
         public int RequestId { get; set; }
         public string willDonate { get; set; }
     

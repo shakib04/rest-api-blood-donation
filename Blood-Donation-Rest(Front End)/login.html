@@ -50,6 +50,9 @@
 	<script src="js/jquery-3.6.0.js"></script>
 	<script src="js/default.js"></script>
 	<script>
+
+		ReturnToDashboardIfLogin();
+
 		$("#loginBtn").click(function () {
 			if ($("#inputEamil").val() == "" || $("#inputPassword").val() == "") {
 				$("#header").html("<p class='text-danger h5'>Fill All The Fields</p>");

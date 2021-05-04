@@ -15,7 +15,7 @@ namespace BloodDonationRestApi.Controllers
         BloodDonationContext context = new BloodDonationContext();
 
         [HttpGet, Route("api/posts")]
-        public IHttpActionResult GetAllPost()
+        public IHttpActionResult Get()
         {
             return Ok(context.Posts.ToList());
         }
@@ -36,7 +36,7 @@ namespace BloodDonationRestApi.Controllers
         }
 
         [HttpDelete, Route("api/posts/{id}")]
-        public IHttpActionResult DeletePost(int id)
+        public IHttpActionResult Delete(int id)
         {
             var list =context.FlagPosts.Where(x => x.PostID == id);
             foreach (var item in list)
@@ -49,7 +49,7 @@ namespace BloodDonationRestApi.Controllers
         }
 
         [HttpPut, Route("api/posts/{id}")]
-        public IHttpActionResult UpdatePost([FromBody]Post post, [FromUri]int id)
+        public IHttpActionResult Put([FromBody]Post post, [FromUri]int id)
         {
             var postToEdit = context.Posts.Find(id);
             postToEdit.Address = post.Address;

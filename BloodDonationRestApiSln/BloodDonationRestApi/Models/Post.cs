@@ -14,11 +14,15 @@ namespace BloodDonationRestApi.Models
 
         [Key]
         public int PostId { get; set; }
+        [Required]
         public string Address { get; set; }
+        [Required]
         public string WantedBlood { get; set; }
         public string Text { get; set; }
         public System.DateTime Time { get; set; }
+        [Required]
         public string HospitalName { get; set; }
+        [Required]
         public string ContactNumber { get; set; }
 
         [JsonIgnore, XmlIgnore]

@@ -14,9 +14,13 @@ namespace BloodDonationRestApi.Models
 
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int BookId { get; set; }
+        [Required]
         public string BookName { get; set; }
+        [Required]
         public string BloodGroup { get; set; }
+        [Required]
         public string PhoneNumber { get; set; }
+        [Required]
         public string Relation { get; set; }
         public int UserId { get; set; }
     
