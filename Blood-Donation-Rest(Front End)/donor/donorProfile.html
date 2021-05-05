@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+	<meta charset="">
+	<script type="text/javascript" src="../jquary.js"></script>
+	<script type="text/javascript" src="js/donorProfile.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
+		integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js"
+		integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc"
+		crossorigin="anonymous"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+	<link rel="stylesheet" href="../css/homePage.css">
+
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<style>
+		#propic>img {
+			width: 250px;
+			height: 250px;
+		}
+	</style>
+	<script>if (localStorage.getItem("userId") == null) {
+			location.replace("../login.html");
+		}</script>
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="donorHome.html">BloodDonation</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+			aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNavDropdown">
+			<ul class="nav navbar-nav">
+				<li class="nav-item">
+					<a class="nav-link active" href="donorProfile.html">Profile</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="donorPost.html">Post</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="donorBloodRequest.html">BloodRequest</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="donorUserlist.html">Users</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="donorRatings.html">Donor Ratings</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="donorBloodGroup.html">Users BloodGroup</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" onclick="Logout()" id="LogOut" href="../index.html">LogOut</a>
+				</li>
+				<script>
+					function Logout(element) {
+						localStorage.clear();
+					}
+				</script>
+			</ul>
+		</div>
+	</nav>
+
+	<h2>Profile</h2>
+
+	<div>
+		<div id="propic">
+
+		</div>
+		<p><a href="file_upload.html">Change Profile Picture</a></p>
+	</div>
+
+
+
+	<p class="text-center h5">Primary Info</p>
+	<table class="table" id="primary_info_tbl">
+		<thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">Info</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Profile is loading...</td>
+			</tr>
+		</tbody>
+	</table>
+	<button value="" id="Edit_Profile_btn" class="btn btn-secondary">Edit Primary Info</button>
+	<script>$("#Edit_Profile_btn").click(function () {
+
+			$("#primary_info_tbl").toggle();
+			$("#others_info_tbl").toggle();
+			$("#Edit_Profile_others_btn").toggle();
+			if ($(this).text() == "Edit Primary Info") {
+				$(this).text("Back to Profile");
+			} else {
+				$(this).text("Edit Primary Info");
+			}
+			FillEditForm();
+			$("#Edit_Profile_Form").toggle();
+
+		});
+
+	</script>
+
+	<div style="display: none;">
+		<p class="text-center h5">Others Info</p>
+
+		<table class="table" id="others_info_tbl">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Info</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Profile is loading...</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<button value="" id="Edit_Profile_others_btn" class="btn btn-secondary">Edit Ohters
+			Info</button>
+	</div>
+
+
+	<div id="Edit_Profile_Form" style="display: none;">
+		<div id="validationMsg"></div>
+		<div class="form-group">
+			<label class="control-label col-md-2" for="Name">Name</label>
+			<div class="col-md-10">
+				<input class="form-control text-box single-line" id="Name" name="Name" type="text" />
+				<span class="field-validation-valid text-danger" data-valmsg-for="Name"
+					data-valmsg-replace="true"></span>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-md-2" for="Email">Email</label>
+			<div class="col-md-10">
+				<input class="form-control text-box single-line" data-val="true"
+					data-val-required="The Email field is required." id="Email" name="Email" type="text" />
+				<span class="field-validation-valid text-danger" data-valmsg-for="Email"
+					data-valmsg-replace="true"></span>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-md-2" for="Phone">Phone Number</label>
+			<div class="col-md-10">
+				<input class="form-control text-box single-line" id="Phone" name="Phone" type="text" />
+				<span class="field-validation-valid text-danger" data-valmsg-for="Phone"
+					data-valmsg-replace="true"></span>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-md-2" for="Address">Address</label>
+			<div class="col-md-10">
+				<input class="form-control text-box single-line" id="Address" name="Address" type="text" />
+				<span class="field-validation-valid text-danger" data-valmsg-for="Address"
+					data-valmsg-replace="true"></span>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-md-2" for="BloodGroup">Your Blood Group</label>
+			<div class="col-md-10">
+				<select class="form-control" id="BloodGroup" name="BloodGroup">
+					<option value="A+">A Positive</option>
+					<option value="A-">A Negative</option>
+					<option value="B+">B Positive</option>
+					<option value="B-">B Negative</option>
+					<option value="AB+">AB Positive</option>
+					<option value="AB-">AB Negative</option>
+					<option value="O+">O Positive</option>
+					<option value="O-">O Negative</option>
+				</select>
+
+				<span class="field-validation-valid text-danger" data-valmsg-for="BloodGroup"
+					data-valmsg-replace="true"></span>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="col-md-offset-2 col-md-10">
+				<input type="submit" id="save_primary_btn" value="Save" class="btn btn-primary" />
+			</div>
+			<script>
+				$("#save_primary_btn").click(function () {
+					console.log("OK");
+					//validation 
+					var all_input = $("#Edit_Profile_Form :input");
+					for (let i = 0; i < all_input.length; i++) {
+						const element = all_input[i];
+						if ($(element).val() == "") {
+							$("#validationMsg").html("<span style='color:red;'>Fill All Fields</span>");
+							return;
+						}
+					}
+
+					$("#validationMsg").html("<span style='color:green;'>All Filed</span>");
+
+					$.ajax({
+
+						url: "http://localhost:10793/api/dprofile/" + localStorage.getItem("userId"),
+						method: "PUT",
+						dataType: 'json',
+						headers: {
+							"Authorization": "Basic " + btoa(localStorage.getItem("email") + ":" + localStorage.getItem("password")),
+						},
+						data: {
+							"Name": $("#Name").val(),
+							"Address": $("#Address").val(),
+							"BloodGroup": $("#BloodGroup").val(),
+							"Phone": $("#Phone").val(),
+							"Email": $("#Email").val(),
+						},
+						success: function (result) {
+							//$("#post_id_search_delete").val("")
+							//loadPosts();
+							loadPrimayInfo();
+							$("#primary_info_tbl").show();
+							$("#Edit_Profile_Form").hide();
+							ClearEditForm();
+							$("#Edit_Profile_btn").text("Edit Profile");
+						}
+					});
+				});
+			</script>
+		</div>
+	</div>
+	</div>
+</body>
+
+</html>
