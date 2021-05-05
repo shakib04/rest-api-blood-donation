@@ -41,6 +41,15 @@ namespace BloodDonationRestApi.Controllers
             return Created("api/users/" + user.UserId, user);
         }
 
+
+        [HttpGet, Route("api/checkdupliemail")]
+        public IHttpActionResult DupliEmail(string Email)
+        {
+            var checkDupliEmail = context.UserInfos.Any(x => x.Email == Email);
+            return Ok(checkDupliEmail);
+        }
+
+
         [HttpPut, Route("api/users/{id}")]
         public IHttpActionResult EditUser([FromBody]UserInfo user, [FromUri]int id)
         {
